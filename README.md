@@ -64,3 +64,22 @@ To get this project up and running, follow these steps:
 4.  Choose a specific meal (e.g., "almoço" for lunch).
 5.  The selected recipe is then processed by GPT to make it more suitable for narration.
 6.  Finally, the `speak` function converts the refined recipe into an audio file, which can be played directly in the notebook.
+
+   # Images
+   ## Input function
+   <img width="1591" height="242" alt="screenshot-2025-11-02_13-02-27" src="https://github.com/user-attachments/assets/d8ab6c41-d930-4522-bc8f-be84c5ff72ac" />
+   
+   ## Meal example from prompt
+   
+   <img width="1222" height="697" alt="screenshot-2025-11-02_12-56-14" src="https://github.com/user-attachments/assets/b13d17e7-dec2-400f-82a9-b2c51ac97f0e" />
+
+   ## Image Generation from promptet meal
+   
+   <img width="812" height="738" alt="screenshot-2025-11-02_12-54-54" src="https://github.com/user-attachments/assets/a4229906-a38e-4a7b-9bef-d5a11c6ecfce" />
+
+   ## Generated text turned into text to speech
+   
+   https://github.com/user-attachments/assets/44ae20f2-826a-46ed-81f3-17f46632ac37
+
+
+
