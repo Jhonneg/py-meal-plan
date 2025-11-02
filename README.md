@@ -1,69 +1,66 @@
-# AI Meal Planner with DALL-E Image Generation
+# Meal Plan Generator with AI
 
-This project uses OpenAI's GPT and DALL-E models to create personalized daily meal plans and generate corresponding images for each meal. You provide a list of ingredients, and the application generates a complete plan for breakfast, lunch, and dinner, including recipes, calorie counts, and visually appealing images.
+This project leverages OpenAI's powerful AI models to create personalized meal plans, generate illustrative images for each recipe, and provide audio narration for easy-to-follow cooking instructions. It's designed to be an interactive tool for culinary inspiration and assistance, all within a Jupyter Notebook environment.
 
 ## Features
 
--   **Customizable Meal Plans:** Generate plans based on specific ingredients, calorie targets, and dietary preferences.
--   **AI-Powered Recipes:** Leverages GPT-4 or GPT-3.5-turbo for creative and detailed recipe generation.
--   **Dynamic Image Generation:** Uses DALL-E 3 to create high-quality, unique images for each meal.
--   **Flexible Output:** Can generate the meal plan in plain text or styled HTML/CSS.
--   **Easy to Use:** All logic is contained within a single Jupyter Notebook for straightforward execution.
+*   **Intelligent Meal Plan Generation**: Utilizes OpenAI's GPT models to generate daily meal plans (breakfast, lunch, dinner) based on provided ingredients, calorie goals, and specific dietary preferences. Recipes include detailed instructions, calorie counts, serving sizes, and preparation times.
+*   **Recipe Image Generation**: Automatically creates unique and descriptive images for each recipe title using OpenAI's DALL-E model, enhancing the visual appeal of your meal plan.
+*   **Audio Narration of Recipes**: Transforms written recipes into spoken audio using OpenAI's Text-to-Speech (TTS) model, making it convenient to listen to instructions while cooking.
 
-## How It Works
+## Technologies Used
 
-1.  **Meal Plan Generation:** The `create_meals` function constructs a detailed prompt with user-defined ingredients and constraints (e.g., calorie limit, use only provided ingredients). It sends this prompt to the OpenAI Chat Completions API.
-2.  **Response Parsing:** The API returns a structured meal plan. The notebook is designed to parse this response, separating the recipes from a list of DALL-E-compatible image prompts (the meal titles).
-3.  **Image Creation:** The `create_and_save_image` function iterates through the extracted titles. For each title, it calls the OpenAI Images API (DALL-E) to generate an image.
-4.  **Saving Images:** The generated image is downloaded from the URL provided by the API and saved locally to an `images/` directory.
+*   **Python**: The primary programming language.
+*   **Jupyter Notebook**: For an interactive and cell-based development experience.
+*   **OpenAI API**:
+    *   **GPT-3.5/GPT-4**: For generating meal plans and refining recipes for speech.
+    *   **DALL-E 3**: For creating recipe images.
+    *   **TTS (Text-to-Speech)**: For narrating recipes.
+*   **`python-dotenv`**: To manage environment variables (e.g., OpenAI API key).
+*   **`Pillow`**: For basic image handling (though primarily used for displaying generated images in the notebook).
+*   **`requests`**: For downloading generated images from DALL-E.
 
-## Setup and Usage
+## Setup
 
-### 1. Prerequisites
+To get this project up and running, follow these steps:
 
--   Python 3.7+
--   Jupyter Notebook or JupyterLab
+1.  **Clone the repository** (if applicable, otherwise ensure you have the `main.ipynb` file).
 
-### 2. Installation
-
-1.  Clone this repository or download the `main.ipynb` file.
-2.  Create and activate a virtual environment (recommended):
+2.  **Install dependencies**:
+    Open your terminal or command prompt and run:
     ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
-3.  Install the required Python packages from the first cell of the notebook or by running:
-    ```bash
-    pip install openai jupyter python-dotenv pillow requests
+    pip install openai jupyter python-dotenv pillow requests -q
     ```
 
-### 3. Configuration
+3.  **Set up your OpenAI API Key**:
+    *   Obtain an API key from your [OpenAI dashboard](https://platform.openai.com/account/api-keys).
+    *   Create a file named `.env` in the root directory of your project.
+    *   Add your API key to the `.env` file in the following format:
+        ```
+        OPENAI_API_KEY='your_openai_api_key_here'
+        ```
 
-1.  Create a file named `.env` in the root directory of the project.
-2.  Add your OpenAI API key to the `.env` file:
-    ```
-    OPENAI_API_KEY="your_openai_api_key_here"
-    ```
+## Usage
 
-### 4. Running the Notebook
-
-1.  Start Jupyter:
+1.  **Open the Jupyter Notebook**:
+    Navigate to the project directory in your terminal and run:
     ```bash
     jupyter notebook
     ```
-2.  Open `main.ipynb`.
-3.  Run the cells in order:
-    -   The first cells install dependencies and load the API key.
-    -   The `create_meals` cell defines the function to generate the meal plan. You can modify the `foods` variable to change the input ingredients.
-    -   The `create_and_save_image` cell defines the function for image generation.
-    -   The final cells execute the functions, print the results, and display/save the generated images.
+    This will open a browser window with the Jupyter interface. Click on `main.ipynb` to open the notebook.
 
-## Project Structure
+2.  **Run the cells sequentially**:
+    Execute each cell in the `main.ipynb` notebook from top to bottom.
 
-```
-.
-├── images/               # Directory for saved meal images
-├── main.ipynb            # The main Jupyter Notebook
-├── .env                  # File for API key (create this yourself)
-└── README.md             # Project documentation
-```
+    *   **Meal Plan Generation**: The `create_meals` function (Cell `VSC-031ddcc1`) is the core for generating meal plans. You can customize ingredients, calorie limits, and other parameters.
+    *   **Image Generation**: After generating a meal plan, the notebook extracts recipe titles. The `create_and_save_image` function (Cell `VSC-a01a832c`) uses these titles to prompt DALL-E to create and save images for each recipe.
+    *   **Recipe Narration**: You can select a specific meal (breakfast, lunch, or dinner). The notebook then refines the recipe text for better spoken delivery and uses the `speak` function (Cell `VSC-1b8d7888`) to generate an audio file of the recipe instructions.
+
+## Workflow Example
+
+1.  Define your desired `foods` and call `create_meals` to get a personalized daily meal plan.
+2.  Extract the recipe titles from the generated meal plan.
+3.  Loop through the titles to generate and save an image for each recipe using DALL-E.
+4.  Choose a specific meal (e.g., "almoço" for lunch).
+5.  The selected recipe is then processed by GPT to make it more suitable for narration.
+6.  Finally, the `speak` function converts the refined recipe into an audio file, which can be played directly in the notebook.
